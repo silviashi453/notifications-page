@@ -1,0 +1,51 @@
+<div
+  *ngIf="notification"
+  class="flex flex-row justify-between gap-5 mb-5 lg:p-5 p-3 rounded-lg"
+  [ngClass]="{
+    'bg-neutral-light-grayish-blue-1': !notification.isRead
+  }"
+>
+  <div class="flex flex-row md:gap-5 gap-2">
+    <img
+      [src]="'../../../assets/' + notification.userAva"
+      alt="User Picture"
+      class="w-12 h-12"
+    />
+    <div class="flex flex-col gap-2 justify-start">
+      <div>
+        <span class="font-bold mr-1 hover:text-primary-blue cursor-pointer">{{
+          notification.userName
+        }}</span>
+        <span class="mr-1">{{ notification.text }}</span>
+        <span
+          *ngIf="notification.post"
+          class="mr-1 text-neutral-dark-grayish-blue font-bold hover:text-primary-blue cursor-pointer"
+          >{{ notification.post }}</span
+        >
+        <span
+          *ngIf="notification.group"
+          class="mr-1 text-neutral-dark-grayish-blue font-bold hover:text-primary-blue cursor-pointer"
+          >{{ notification.group }}</span
+        >
+        <span
+          *ngIf="!notification.isRead"
+          class="w-2 h-2 bg-primary-red rounded-full inline-block"
+        ></span>
+      </div>
+      <p class="text-neutral-grayish-blue">{{ notification.time }} ago</p>
+      <div
+        *ngIf="notification.message"
+        class="p-5 border border-solid border-1 border-neutral-grayish-blue hover:border-none hover:bg-neutral-light-grayish-blue-2 rounded-lg w-full cursor-pointer"
+      >
+        {{ notification.message }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="notification.commentPicture">
+    <img
+      [src]="'../../../../../assets/' + notification.commentPicture"
+      class="w-12 h-12 cursor-pointer"
+      alt="Comment Picture"
+    />
+  </div>
+</div>
