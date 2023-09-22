@@ -8,6 +8,7 @@ import { Notification } from 'src/app/notification';
 })
 export class NotificationComponent {
   notificationList: Notification[] = [];
+  unreadCount: number = 0;
 
   constructor(private notificationService: NotificationService) {}
 
@@ -16,8 +17,18 @@ export class NotificationComponent {
   }
 
   getNotifications(): void {
-    this.notificationService
-      .getNotifications()
-      .subscribe((notifications) => (this.notificationList = notifications));
+    this.notificationService.getNotifications().subscribe((notifications) => {
+      this.notificationList = notifications;
+      this.notificationList.forEach((notif) => {
+        if (!notif.isRead) {
+          this.unreadCount++;
+        }
+      });
+    });
+  }
+
+  markAllAsRead(): void {
+    this.notificationService.postAllRead();
+    this.unreadCount = 0;
   }
 }

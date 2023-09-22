@@ -65,13 +65,13 @@ export class NotificationService {
       isRead: true,
     },
   ];
+  unreadCount: number = 0;
 
   getNotifications(): Observable<Notification[]> {
     return of(this.notificationList);
   }
 
   postAllRead(): void {
-    console.log('halo');
     this.notificationList.forEach((notification) => {
       if (!notification.isRead) {
         notification.isRead = true;
